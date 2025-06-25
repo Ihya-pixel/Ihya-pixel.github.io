@@ -13,13 +13,7 @@
       overflow-x: hidden;
       text-align: center;
     }
-    .login-box {
-  background: rgba(255, 255, 255, 0.95); /* Lebih solid */
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15); /* Bayangan lebih besar */
-  border: 2px solid #d2c2f5; /* Tambahan garis tepi */
-  position: relative;
-  z-index: 3; /* Pastikan lebih tinggi dari ornamen */
-}
+    
 
     .container {
       max-width: 500px;
@@ -90,13 +84,17 @@
 
     /* Admin */
     .login-box, .admin-panel {
-      max-width: 500px;
-      margin: 30px auto;
-      background: #ffffffcc;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-    }
+  max-width: 500px;
+  margin: 30px auto;
+  background: rgba(255, 255, 255, 0.95); /* dibuat lebih solid */
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  border: 2px solid #cbb7ff;
+  position: relative;
+  z-index: 3; /* <<< inilah kunci utamanya */
+}
+
 
     .message-box {
       background: #f9f9f9;

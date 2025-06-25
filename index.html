@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>࣪ ִֶָ☾.Send message for Ihya and listening music🎧ྀི♪⋆.✮</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #f7d0ff, #d0f0ff);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 30px;
+      overflow-x: hidden;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.75);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #7a5be0;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #6546c4;
+    }
+
+    .ornament {
+      position: absolute;
+      width: 120px;
+      opacity: 10;
+      animation: float 6s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .ornament.one { top: 60px; left: 60px; }
+    .ornament.two { bottom: 20px; right: 20px; }
+    .ornament.three {bottom: 20px; left: 20px; }
+    .ornament.four {top: 60px; right: 60px; }
+    .ornament.middle-left {
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .ornament.middle-right {
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .ornament.middle-left,
+    .ornament.middle-right {
+      position: absolute;
+      width: 150px;
+      opacity: 10;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(-50%) translateY(0); }
+      50%  { transform: translateY(-50%) translateY(-20px); }
+      100% { transform: translateY(-50%) translateY(0); }
+    }
+
+    /* Admin */
+    .login-box, .admin-panel {
+      max-width: 500px;
+      margin: 30px auto;
+      background: #ffffffcc;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    .message-box {
+      background: #f9f9f9;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+      border-left: 5px solid #b09eff;
+      text-align: left;
+    }
+
+    #loginBox {
+      display: none;
+    }
+
+    #adminPanel {
+      display: none;
+    }
+
+    #statusMsg {
+      color: green;
+    }
+
+    #loginStatus {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ornamen -->
+  <img src="picture/🌀.jpeg" class="ornament one" />
+  <img src="picture/frog enjoy the music.jpeg" class="ornament two" />
+  <img src="picture/summer shark ⋆☀︎_.jpeg" class="ornament three" />
+  <img src="picture/𖤐.jpeg" class="ornament four" />
+  <img src="video/cutee.gif" class="ornament middle-left" />
+  <img src="video/umbrella fall.gif" class="ornament middle-right" />
+
+ <audio id="player" autoplay></audio>
+<script>
+  const playlist = [
+    "song/chill song.mp3",
+    "song/c:\Users\ACER\Downloads\𓇼ִֶָ ࣪˖ ִֶָ🐇𓏲✩chill ‧₊ִֶָ་༘˚ .mp3"
+  ];
+
+  let current = 0;
+  const player = document.getElementById("player");
+
+  // Set lagu pertama
+  player.src = playlist[current];
+  player.play();
+
+  // Saat lagu selesai, lanjut ke lagu berikutnya
+  player.addEventListener("ended", function () {
+    current++;
+    if (current >= playlist.length) {
+      current = 0; // Ulang ke lagu pertama
+    }
+    player.src = playlist[current];
+    player.play();
+  });
+</script>
+
+
+  <!-- Form Kirim Pesan -->
+  <div class="container">
+    <h1>₊˚⊹✉︎Kirim pesan untuk Ihyaᝰ.ᐟ
+    </h1>
+    <form id="message-form">
+      <input type="text" id="sender" placeholder="Nama kamu" required>
+      <textarea id="message" placeholder="Tulis pesanmu..." required></textarea>
+      <button type="submit">Send message</button>
+      <p id="statusMsg"></p>
+    </form>
+    <button onclick="showLogin()">🔐 Only Ihya can see the message</button>
+  </div>
+
+  <!-- Login Box -->
+  <div class="login-box" id="loginBox">
+    <h2>Only Ihya can log in</h2>
+    <input type="password" id="adminPassword" placeholder="write the password">
+    <button onclick="checkAdmin()">Enter</button>
+    <p id="loginStatus"></p>
+  </div>
+
+  <!-- Panel Admin -->
+  <div class="admin-panel" id="adminPanel">
+    <h2>📬 All messages</h2>
+    <div id="messagesContainer"></div>
+  </div>
+
+  <script>
+    const passwordBenar = "Ihyaeren2130";
+
+    // Simpan pesan
+    document.getElementById("message-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("sender").value;
+      const message = document.getElementById("message").value;
+
+      const messages = JSON.parse(localStorage.getItem("UserMessages") || "[]");
+      messages.push({ name, message, time: new Date().toLocaleString() });
+      localStorage.setItem("UserMessages", JSON.stringify(messages));
+
+      document.getElementById("statusMsg").innerText = "ᯓ💌Pesan terkirim, Thank u𖹭𖹭.ᐟ";
+      this.reset();
+    });
+
+    // Tampilkan login box
+    function showLogin() {
+      document.getElementById("loginBox").style.display = "block";
+    }
+
+    // Cek password
+    function checkAdmin() {
+      const input = document.getElementById("adminPassword").value;
+      if (input === passwordBenar) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("adminPanel").style.display = "block";
+        tampilkanPesan();
+      } else {
+        document.getElementById("loginStatus").innerText = "Wrong password!";
+      }
+    }
+
+    // Tampilkan pesan di admin panel
+    function tampilkanPesan() {
+      const container = document.getElementById("messagesContainer");
+      const messages = JSON.parse(localStorage.getItem("UserMessages") || "[]");
+      container.innerHTML = "";
+
+      if (messages.length === 0) {
+        container.innerHTML = "<p>No messages.</p>";
+        return;
+      }
+
+      messages.reverse().forEach((msg) => {
+        container.innerHTML += `
+          <div class="message-box">
+            <strong>${msg.name}</strong><br>
+            ${msg.message}<br>
+            <small>${msg.time}</small>
+          </div>
+        `;
+      });
+    }
+  </script>
+
+</body>
+</html>

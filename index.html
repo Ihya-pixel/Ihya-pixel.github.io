@@ -51,10 +51,10 @@
       z-index: 0;
     }
 
-    .ornament.one { top: 20px; left: 20px; }
+    .ornament.one { top: 60px; left: 20px; }
     .ornament.two { bottom: 20px; right: 20px; }
     .ornament.three {bottom: 20px; left: 20px; }
-    .ornament.four {top: 20px; right: 20px; }
+    .ornament.four {top: 60px; right: 20px; }
     .ornament.middle-left {
       left: 10px;
       top: 50%;
@@ -126,35 +126,11 @@
   <img src="video/cutee.gif" class="ornament middle-left" />
   <img src="picture/𖤐.jpeg" class="ornament middle-right" />
 
- <audio id="player" autoplay></audio>
-<script>
-  const playlist = [
-    "song/chill song.mp3",
-    "song/c:\Users\ACER\Downloads\𓇼ִֶָ ࣪˖ ִֶָ🐇𓏲✩chill ‧₊ִֶָ་༘˚ .mp3"
-  ];
-
-  let current = 0;
-  const player = document.getElementById("player");
-
-  // Set lagu pertama
-  player.src = playlist[current];
-  player.play();
-
-  // Saat lagu selesai, lanjut ke lagu berikutnya
-  player.addEventListener("ended", function () {
-    current++;
-    if (current >= playlist.length) {
-      current = 0; // Ulang ke lagu pertama
-    }
-    player.src = playlist[current];
-    player.play();
-  });
-</script>
-
+ 
 
   <!-- Form Kirim Pesan -->
   <div class="container">
-    <h1>₊˚⊹✉︎Kirim pesan untuk Ihyaᝰ.ᐟ
+    <h1>‧₊☾.⋅🎀Kirim pesan untuk Ihya✉︎ᝰ.ᐟ
     </h1>
     <form id="message-form">
       <input type="text" id="sender" placeholder="Nama kamu" required>
@@ -192,7 +168,7 @@
       messages.push({ name, message, time: new Date().toLocaleString() });
       localStorage.setItem("UserMessages", JSON.stringify(messages));
 
-      document.getElementById("statusMsg").innerText = "ᯓ💌Pesan terkirim, Thank u𖹭𖹭.ᐟ";
+      document.getElementById("statusMsg").innerText = "ᯓ💌Pesan terkirim, Thank u✮⋆˙";
       this.reset();
     });
 

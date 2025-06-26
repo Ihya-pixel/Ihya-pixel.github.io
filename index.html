@@ -164,19 +164,7 @@
   <script>
     const passwordBenar = "ihyaeren2130";
 
-    // Simpan pesan
-    document.getElementById("message-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const name = document.getElementById("sender").value;
-      const message = document.getElementById("message").value;
-
-      const messages = JSON.parse(localStorage.getItem("UserMessages") || "[]");
-      messages.push({ name, message, time: new Date().toLocaleString() });
-      localStorage.setItem("UserMessages", JSON.stringify(messages));
-
-      document.getElementById("statusMsg").innerText = "ᯓ💌Pesan terkirim, Thank's✮⋆˙";
-      this.reset();
-    });
+  
 
     // Tampilkan login box
     function showLogin() {
@@ -230,7 +218,7 @@
     authDomain: "ihya-pixel.firebaseapp.com",
     databaseURL: "https://ihya-pixel-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "ihya-pixel",
-    storageBucket: "ihya-pixel.firebasestorage.app",
+    storageBucket: "storageBucket: "ihya-pixel.appspot.com",
     messagingSenderId: "165217570138",
     appId: "1:165217570138:web:5f7003f81629faef067763"
     measurementId: "G-JLLCF23T29"

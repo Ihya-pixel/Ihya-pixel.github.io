@@ -219,4 +219,86 @@
   </script>
 
 </body>
+  <!-- Tambahkan ini di akhir <body>, setelah semua elemen HTML -->
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+
+<script>
+  // 🔐 Konfigurasi Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyBo3zHdAo_0NpRGId-GwPlEdke7qSwqA7Q",
+    authDomain: "ihya-pixel.firebaseapp.com",
+    databaseURL: "https://ihya-pixel-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "ihya-pixel",
+    storageBucket: "ihya-pixel.firebasestorage.app",
+    messagingSenderId: "165217570138",
+    appId: "1:165217570138:web:5f7003f81629faef067763"
+    measurementId: "G-JLLCF23T29"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  const passwordBenar = "ihyaeren2130";
+
+  // Kirim pesan ke Realtime Database
+  document.getElementById("message-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("sender").value;
+    const message = document.getElementById("message").value;
+
+    const pesanRef = database.ref("pesan").push();
+    pesanRef.set({
+      name: name,
+      message: message,
+      time: new Date().toLocaleString()
+    });
+
+    document.getElementById("statusMsg").innerText = "ᯓ💌Pesan terkirim, Thank's✮⋆˙";
+    this.reset();
+  });
+
+  // Tampilkan login box
+  function showLogin() {
+    document.getElementById("loginBox").style.display = "block";
+  }
+
+  // Cek password admin
+  function checkAdmin() {
+    const input = document.getElementById("adminPassword").value;
+    if (input === passwordBenar) {
+      document.getElementById("loginBox").style.display = "none";
+      document.getElementById("adminPanel").style.display = "block";
+      tampilkanPesan();
+    } else {
+      document.getElementById("loginStatus").innerText = "Wrong password!";
+    }
+  }
+
+  // Ambil dan tampilkan pesan dari Firebase
+  function tampilkanPesan() {
+    const container = document.getElementById("messagesContainer");
+    container.innerHTML = "";
+
+    database.ref("pesan").once("value", (snapshot) => {
+      const data = snapshot.val();
+      if (!data) {
+        container.innerHTML = "<p>No messages.</p>";
+        return;
+      }
+
+      const messages = Object.values(data).reverse();
+      messages.forEach((msg) => {
+        container.innerHTML += `
+          <div class="message-box">
+            <strong>${msg.name}</strong><br>
+            ${msg.message}<br>
+            <small>${msg.time}</small>
+          </div>
+        `;
+      });
+    });
+  }
+</script>
+
 </html>
